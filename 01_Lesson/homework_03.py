@@ -41,31 +41,3 @@ else:
      result = False
 
 print(result)
-
-                 
-
-
-
-
-#     right_side = int(digit_count / 2) + 1
-
-#     left_sum = 0
-#     right_sum = 0
-#     last_digit = 0
-
-#     i = 0
-#     while i < right_side:
-#         last_digit = n % 10
-#         n = int(n / 10)
-#         right_sum += last_digit
-#         i += 1
-#         print(i)
-
-#         while i < digit_count:
-#             last_digit = n % 10
-#             n = int(n / 10)
-
-#             left_sum += last_digit
-#             i += 1
-#             print(i)
-
