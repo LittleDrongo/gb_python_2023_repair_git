@@ -3,7 +3,7 @@ import zipfile
 
 start_directory = "C:/DELETE_ME"
 find_files = [
-    'img.bmp', 'img_1.txt'
+    'img.bmp', 'img_1.bmp', 'Yes!.bmp',
     ]  # Список файлов для поиска
 
 
