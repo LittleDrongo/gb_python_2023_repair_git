@@ -21,6 +21,7 @@ zip_file_path = "C:/DELETE_ME/02-02-2023/arc3.zip"
 
 # Открываем архив
 with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+
     # Получаем список файлов и директорий внутри архива
     zip_contents = zip_ref.namelist()
     print("X-1")
@@ -29,16 +30,25 @@ with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
     # Перебираем элементы архива
     for item in zip_contents:
         print("X-2")
+
         # Проверяем, если имя элемента находится в списке файлов для извлечения
-        if any(item in target_files for item in zip_contents):
+        if any(item in target_files for item in target_files):
             for item in zip_contents:
-                # item_path = os.path.join(item)
-                if not os.path.isdir(item):
-                        print(f'Кажется найден {item}')                
-                        zip_ref.extract(item, os.path.join(output_patch, item))
-            
-        # if item in target_files:
-        #     print(f'Найден: {item}') 
+                if any(find_file in item for find_file in target_files):
+                    print('это папка')
+                else:
+                    print('это файл')
+                    print(f'Кажется найден {item}')                
+                    zip_ref.extract(item, os.path.join(output_patch, item))
+
+
+
+
+                # # НЕ УДАЛЯТЬ
+                # if not os.path.isdir(item):
+                #         print(f'Кажется найден {item}')                
+                #         zip_ref.extract(item, os.path.join(output_patch, item))
+                # # НЕ УДАЛЯТЬ
 
 
 # if any(find_file in zip_item for find_file in find_files):

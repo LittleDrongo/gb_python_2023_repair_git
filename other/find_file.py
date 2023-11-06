@@ -3,7 +3,7 @@ import zipfile
 
 output_folder = 'C:/DELETE_ME_2'  # Укажите папку, куда извлечь файлы
 root_folder = 'C:/DELETE_ME'
-find_files = ['img.bmp', 'img_1.bmp', 'Yes!.bmp',]
+find_files = ['нужный_файл', 'img_1.bmp', 'Yes!.bmp',]
 
 # # ============ ИЩЕМ В ПАПКАХ
 

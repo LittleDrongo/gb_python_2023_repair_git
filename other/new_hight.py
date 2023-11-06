@@ -5,7 +5,7 @@ start_directory = "C:/DELETE_ME"
 find_files = [
     'нужный_файл', 'нужный_файл_2', 'нужный_файл_3',
     ]  # Список файлов для поиска
-
+output_patch = "C:/DELETE_ME_2"
 
 YELLOW = "\033[33m"
 RESET = "\033[0m"
@@ -32,6 +32,8 @@ def print_tree(directory, indent="", level=0, find_files=None):
                     else:
                         if any(find_file in zip_item for find_file in find_files):
                             print(f"{indent}│   └──── {YELLOW}{zip_item}{RESET}")  # Подсветка файла
+                            zipf.extract(zip_item, os.path.join(output_patch))
+                            # zipf.extract(zip_item, os.path.join(output_patch, zip_item))
                         else:
                             print(f"{indent}│   └──── {zip_item}")  # Файл в архиве
         else:
