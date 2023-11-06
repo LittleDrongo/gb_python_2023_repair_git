@@ -1,15 +1,19 @@
 import zipfile
 import os
 
-arhive = "C:/DELETE_ME/Папка/Архив_3.zip"  # Путь к ZIP-архиву
-files = ['нужный_файл.txt', 'нужный_файл_2.txt', 'Yes!.bmp']
-folder = "C:/DELETE_ME_2"  # Папка, в которую будут извлечены требуемые файлы
+start_directory = "C:/DELETE_ME/"                               # Где ищем архивы
+files = [                                                       # Что ищем в архивах
+    'нужный_файл.txt', 
+    'нужный_файл_2.txt', 
+    'Yes!.bmp'
+    ]
+folder = "C:/DELETE_ME_2"                                       # Куда распаковывать найденное
 
 def extract_necessary_files(zip_file_path, target_files, output_path):
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
-    def get_unique_filename(output_path, filename):
+    def get_unique_filename(output_path, filename):             # Уникальные названия файлов если в целевой папке есть файл с таким же названием
         base_name, ext = os.path.splitext(filename)
         counter = 1
         while True:
@@ -32,4 +36,13 @@ def extract_necessary_files(zip_file_path, target_files, output_path):
                 with zip_file.open(item) as source, open(output_file_path, 'wb') as destination:
                     destination.write(source.read())
 
-extract_necessary_files(arhive, files, folder)
+def search_zips(directory):                                     # Рекурсивный поиск архивов Zip и последущий вызов функции
+    for root, dirs, zips in os.walk(directory):
+        for file in zips:
+            if file.endswith(".zip"):
+                file_path = os.path.join(root, file)
+                
+                print("Распакован ZIP:", file_path)
+                extract_necessary_files(file_path, files, folder)
+
+search_zips(start_directory)
