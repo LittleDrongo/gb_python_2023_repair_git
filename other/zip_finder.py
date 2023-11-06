@@ -31,7 +31,12 @@ with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         print("X-2")
         # Проверяем, если имя элемента находится в списке файлов для извлечения
         if any(item in target_files for item in zip_contents):
-            print(f'Кажется найден {item}')
+            for item in zip_contents:
+                # item_path = os.path.join(item)
+                if not os.path.isdir(item):
+                        print(f'Кажется найден {item}')                
+                        zip_ref.extract(item, os.path.join(output_patch, item))
+            
         # if item in target_files:
         #     print(f'Найден: {item}') 
 
