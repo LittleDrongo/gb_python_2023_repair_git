@@ -8,9 +8,9 @@
 # 8
 # 16
 
-n = 16
+n = 3
 num = 1
 
-while num != n * 2:
+while num < n:
     print(num)
-    num = num * 2
+    num *= 2
