@@ -8,17 +8,12 @@
 # p = 27
 # На выходе: 3 9
 
-# Произведение двух чисел
-# Пример: Найдите произведение чисел.
-# 14×15=210.
-
-s = 12
-p = 27
+s = 17
+p = 72
 
 for x in range(s):
     for y in range(p):
         if s == x + y and p == x * y:
-            print(f'{x} {y}')
+            result = (f'{y} {x}')
 
-# for x in range(s):
-#     print (x)
+print(result)
