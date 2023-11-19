@@ -20,6 +20,16 @@ from random import randint
 watermelons_weight = list(map(int, '5 1 6 5 9'.split()))
 print(max(watermelons_weight), min(watermelons_weight))
 
+mylist = [5, 1, 6, 5, 9]
+print(min(mylist), max(mylist))
+
+
+# массивы
+# списки
+# кортежи
+# множества
+# замороженные множества
+# словари
 
 
 # print (max_weight)
