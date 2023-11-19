@@ -8,9 +8,14 @@
 # 8
 # 16
 
-n = 3
+n = 35
 num = 1
 
-while num < n:
-    print(num)
-    num *= 2
+if n % 2 == 0:
+    while num <= n:
+        print(num)
+        num *= 2
+else:
+    while num < n:
+        print(num)
+        num *= 2
