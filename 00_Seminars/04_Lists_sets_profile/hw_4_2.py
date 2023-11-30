@@ -31,3 +31,14 @@ while index != -1:
 print(
     max(fragmet_sets)
 )
+
+
+# arr = [5, 8, 6, 4, 9, 2, 7, 3]
+# max1 = 0
+# for i in range (len(arr)):
+#     if arr[i] + arr[i - 1] + arr[i -2] > max1:
+#         max1 = arr[i] + arr[i - 1] + arr[i - 2]
+#     else:
+#         continue
+#     i += 1
+# print(max1)
