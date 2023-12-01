@@ -17,3 +17,13 @@ print(
         get_direction_on_position(position, target2), RAD, USSR
     )
 )
+
+
+target3 = find_position_3d(position = spotter, 
+                           azimuth =  convert_angle(45, USSR, RAD), 
+                           distance = 1900, 
+                           angle_target = convert_angle(10, USSR, RAD)
+                           )
+
+print(F"Цель 3{target3}")
+
