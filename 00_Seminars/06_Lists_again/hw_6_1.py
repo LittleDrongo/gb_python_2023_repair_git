@@ -23,9 +23,15 @@
 
 """
 
+# list_1 = [-5, 9, 0, 3, -1, -2, 1, 4, -2, 10, 2, 0, -9, 8, 10, -9, 0, -5, -5, 7]
+# min_number = 0
+# max_number = 10
+
+
+
 list_1 = [-5, 9, 0, 3, -1, -2, 1, 4, -2, 10, 2, 0, -9, 8, 10, -9, 0, -5, -5, 7]
-min_number = 0
-max_number = 10
+min_number = -10
+max_number = -4
 
 def find_value_range_index(array, min_value, max_value):
     for i in range(len(array)):
@@ -33,4 +39,12 @@ def find_value_range_index(array, min_value, max_value):
             print(i)
             
 
-find_value_range_index(list_1, 0, 10)
+find_value_range_index(list_1, min_number, max_number)
+
+# Ожидаемый ответ:
+
+# 0
+# 12
+# 15
+# 17
+# 18
