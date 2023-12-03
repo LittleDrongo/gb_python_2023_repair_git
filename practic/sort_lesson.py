@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+print(hello)
+=======
 def find_smallest(arr): #this function can find smallest item in array
     smallest = arr[0]
     smallest_index = 0
@@ -6,6 +9,7 @@ def find_smallest(arr): #this function can find smallest item in array
             smallest = arr[i]
             smallest_index = i
     return smallest_index
+>>>>>>> 0ce833a006e30bc587ea283fdb7bb63e0395840b
 
 def selection_sort(arr):
     newArr = []
