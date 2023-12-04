@@ -1,6 +1,6 @@
 """
-    Напишите функцию print_operation_table(operation, num_rows, num_columns), которая принимает в качестве аргумента функцию, вычисляющую элемент по номеру строки и столбца.
-    Аргументы num_rows и num_columns указывают число строк и столбцов таблицы, которые должны быть распечатаны.
+    Напишите функцию print_operation_table(operation, num_num_rows, num_columns), которая принимает в качестве аргумента функцию, вычисляющую элемент по номеру строки и столбца.
+    Аргументы num_num_rows и num_columns указывают число строк и столбцов таблицы, которые должны быть распечатаны.
     Нумерация строк и столбцов идет с единицы (подумайте, почему не с нуля).
 
     Если строк меньше двух, выдайте текст
@@ -16,66 +16,34 @@
     2 4 6 
     3 6 9
 """
-# # Создание таблицы с размером 3x3, заполненной нулями
-# a = 3           
-# mas = [0] * a 
-# for i in range(a): 
-#     mas[i] = [0] * a 
-# # print(mas) # Выведет [[0, 0, 0], [0, 0, 0], [0, 0, 0]]     
 
-# mas2 = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]     
-# print(mas2[1][1])
- 
+def print_operation_table(operation, num_rows, num_columns):
 
- 
-# def print_operation_table(operation, num_rows=3, num_columns=3):
-#     error_string = 'ОШИБКА! Размерности таблицы должны быть больше 2!'
-#     if num_rows < 3 or num_columns < 3:
-#         print(error_string)
-#     else:
+    error_string = 'ОШИБКА! Размерности таблицы должны быть больше 2!'
+    if num_rows < 3 or num_columns < 3:
+        print(error_string)
+    else:
+        # Создание таблицы
+        table = [[1] * (num_columns) for _ in range(num_rows)]
 
-def print_operation_table(operation, rows, cols):
-    # Создание таблицы
-    table = [[1] * (cols) for _ in range(rows)]
-
-    # Нумерация строк и столбцов
-    for i in range(1, rows):
-        table[i][0] = i + 1
-    for j in range(1, cols):
-        table[0][j] = j + 1
- 
-    # # Заполнение таблицы результатами бинарных операций
-    for i in range(1, rows):
-        for j in range(1, cols):
-            table[i][j] = operation(table[i][0], table[0][j])
-
-    # Вывод таблицы
-    for row in table:
-        print(' '.join(map(str, row)))
-
-# Пример использования с операцией сложения
-# print_operation_table(lambda x, y: x + y, 4, 4)
-#
-
-print_operation_table(lambda x, y: x + y, 4, 4)
-print()
-print_operation_table(lambda x, y: x * y, 3, 3)
-print()
-print_operation_table(lambda x, y: x - y, 5, 5)
+        # Нумерация строк и столбцов
+        for i in range(1, num_rows):
+            table[i][0] = i + 1
+        for j in range(1, num_columns):
+            table[0][j] = j + 1
     
-# Сначала нужно создать таблицу размером 5х5 с нумеровонным первым столбцом и строкой, пример:
+        # # Заполнение таблицы результатами бинарных операций
+        for i in range(1, num_rows):
+            for j in range(1, num_columns):
+                table[i][j] = operation(table[i][0], table[0][j])
 
+        # Вывод таблицы
+        for row in table:
+            print(' '.join(map(str, row)))
 
-# 1 2 3 4 5
-# 2 0 0 0 0
-# 3 0 0 0 0
-# 4 0 0 0 0
-# 5 0 0 0 0
-
-# А потом нужно заполнить саму таблицу результатами бинарных операций
 # -------------------------------------------------
 
-# print_operation_table(lambda x, y: x + y, 4, 4)
+print_operation_table(lambda x, y: x + y, 4, 4)
 
 # Ожидаемый ответ:
 
