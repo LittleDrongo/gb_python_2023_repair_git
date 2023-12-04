@@ -28,6 +28,10 @@ from math import *
 stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
 
 
+stroka2 = 'пара-ра-рам рам-пам-папам па-ра-па-дама'
+
+
+stroka3 = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
 
  
 
@@ -63,20 +67,37 @@ def check_for_rhythm(poem):
         count_arr.append(vowel_counts(phrase))
         count_arr_set = set(count_arr)
 
-    print(count_arr_set)
-    print(len(count_arr_set)) 
-    # Добавить ретурн ИСТИНА или ЛОЖЬ
-    # Добавить строковый ретурн если 0
+    return (len(count_arr_set)) 
 
-check_for_rhythm(stroka)
 
+
+
+def check_param_pam_pam(str):
+    okay_string = 'Парам пам-пам'
+    not_okay_string = 'Пам парам'
+    error_string = 'Количество фраз должно быть больше одной!'
+
+    if check_for_rhythm(str) == 1:
+        print(okay_string)
+
+    if check_for_rhythm(str) == 0:
+        print(error_string)
+
+    if check_for_rhythm(str) > 1:
+        print(not_okay_string)
+
+
+check_param_pam_pam(stroka)
+
+
+check_param_pam_pam(stroka2)
+
+# print(check_param_pam_pam(stroka)
+#     )
 # написать функцию которая будет отвечать строками 
 # если 1 - хорошо
 # если 0 - ошибка
 # если >1 - не хорошо
-okay_string = 'Парам пам-пам'
-not_okay_string = 'Пам парам'
-error_string = 'Количество фраз должно быть больше одной!'
 
 
 # # Если фраза только одна, то ритм определить не получится и необходимо вывести:
