@@ -31,7 +31,7 @@ stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
 stroka2 = 'пара-ра-рам рам-пам-папам па-ра-па-дама'
 
 
-stroka3 = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
+stroka3 = 'пара-ра-рам-рам-пам-апам-па-ра-па-дам'
 
  
 
@@ -63,11 +63,16 @@ def phrases_counts(string):
 def check_for_rhythm(poem):
     str = poem.split()
     count_arr = []
+    count = -1
     for phrase in str:
+        count += 1
         count_arr.append(vowel_counts(phrase))
         count_arr_set = set(count_arr)
 
-    return (len(count_arr_set)) 
+    if count == 0:
+        return 0
+    else: 
+        return (len(count_arr_set)) 
 
 
 
@@ -91,6 +96,8 @@ check_param_pam_pam(stroka)
 
 
 check_param_pam_pam(stroka2)
+
+check_param_pam_pam(stroka3)
 
 # print(check_param_pam_pam(stroka)
 #     )
