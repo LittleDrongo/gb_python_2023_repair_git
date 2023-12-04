@@ -23,21 +23,17 @@ def print_operation_table(operation, num_rows, num_columns):
     if num_rows < 3 or num_columns < 3:
         print(error_string)
     else:
-        # Создание таблицы
         table = [[1] * (num_columns) for _ in range(num_rows)]
 
-        # Нумерация строк и столбцов
         for i in range(1, num_rows):
             table[i][0] = i + 1
         for j in range(1, num_columns):
             table[0][j] = j + 1
     
-        # # Заполнение таблицы результатами бинарных операций
         for i in range(1, num_rows):
             for j in range(1, num_columns):
                 table[i][j] = operation(table[i][0], table[0][j])
 
-        # Вывод таблицы
         for row in table:
             print(' '.join(map(str, row)))
 
