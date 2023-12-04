@@ -53,13 +53,6 @@ def consonant_counts(string): # Считает кол-во согласных б
             count += 1
     return count
 
-def phrases_counts(string):
-    count = 0
-    phrases = string.split(' ')
-    for i in phrases:
-        count += 1
-    return count
-
 def check_for_rhythm(poem):
     str = poem.split()
     count_arr = []
@@ -73,9 +66,6 @@ def check_for_rhythm(poem):
         return 0
     else: 
         return (len(count_arr_set)) 
-
-
-
 
 def check_param_pam_pam(str):
     okay_string = 'Парам пам-пам'
@@ -93,28 +83,3 @@ def check_param_pam_pam(str):
 
 
 check_param_pam_pam(stroka)
-
-
-check_param_pam_pam(stroka2)
-
-check_param_pam_pam(stroka3)
-
-# print(check_param_pam_pam(stroka)
-#     )
-# написать функцию которая будет отвечать строками 
-# если 1 - хорошо
-# если 0 - ошибка
-# если >1 - не хорошо
-
-
-# # Если фраза только одна, то ритм определить не получится и необходимо вывести:
-# phrases = 0
-# if phrases < 2:
-#     print(error_string)
-# else:
-#     print(2)
-
-
-    #  Винни-Пух считает, что ритм есть, если число слогов (т.е. число гласных букв) в каждой фразе стихотворения одинаковое.
-    # Фраза может состоять из одного слова, если во фразе несколько слов, то они разделяются дефисами.
-    # Фразы отделяются друг от друга пробелами.
