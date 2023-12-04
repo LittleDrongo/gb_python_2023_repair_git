@@ -19,3 +19,68 @@
 
     Парам пам-пам
 """
+from math import *
+
+# Парам   пам-пам
+# Фраза   Фраза
+#         слова
+
+stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
+
+
+okay_string = 'Парам пам-пам'
+not_okay_string = 'Пам парам'
+error_string = 'Количество фраз должно быть больше одной!'
+ 
+
+def vowel_counts(string): # Считает кол-во гласных букв
+    vowel_letters = 'АИОУЫЭЕЁЮЯ' # Гласные буквы
+    count = 0
+    string = string.upper()
+    for char in string:
+        if char in vowel_letters:
+            count += 1
+    return count
+
+def consonant_counts(string): # Считает кол-во согласных букв
+    consonant_letters = 'БВГДЖЗЙКЛМНПРСТФХЦЧШЩ' # Согласные буквы
+    count = 0
+    string = string.upper()
+    for char in string:
+        if char in consonant_letters:
+            count += 1
+    return count
+
+def phrases_counts(string):
+    count = 0
+    phrases = string.split(' ')
+    for i in phrases:
+        count += 1
+    return count
+
+def check_for_rhythm(poem):
+    str = poem.split()
+    count_arr = []
+    for phrase in str:
+        count_arr.append(vowel_counts(phrase))
+        count_arr_set = set(count_arr)
+
+    print(count_arr_set)
+    print(len(count_arr_set)) 
+    # 
+
+check_for_rhythm(stroka)
+
+
+
+# # Если фраза только одна, то ритм определить не получится и необходимо вывести:
+# phrases = 0
+# if phrases < 2:
+#     print(error_string)
+# else:
+#     print(2)
+
+
+    #  Винни-Пух считает, что ритм есть, если число слогов (т.е. число гласных букв) в каждой фразе стихотворения одинаковое.
+    # Фраза может состоять из одного слова, если во фразе несколько слов, то они разделяются дефисами.
+    # Фразы отделяются друг от друга пробелами.
