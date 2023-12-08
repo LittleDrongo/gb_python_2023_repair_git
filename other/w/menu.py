@@ -3,19 +3,20 @@ from highlighter import *
 from parser_funcs import *
 
 
+
 def main():
-    # # НАСТРОЙКИ ДЛЯ ТЕСТОВ
+    
     default_find_files = []  # Список файлов для поиска
     files_from_txt = []
+    
+    # НАСТРОЙКИ ДЛЯ ТЕСТОВ
     default_txt = 'C:/Test/file_list.txt'
     default_start_directory = 'C:/Test/start_dr'
     default_output_directory = 'C:/Test/outpute_dir'
 
     # # НАСТРОЙКИ ДЛЯ СЕРВЕРА UNIX
-    # default_find_files = []  # Список файлов для поиска
-    # files_from_txt = []
-    # default_txt = 'other/w/target_files.txt'
-    # default_start_directory = 'home/backup/clr/tap/20220222'
+    # default_txt = '.file_list.txt'
+    # default_start_directory = '/backup/clr/tap/'
     # default_output_directory = '/backup/clr/tmp/fomin_temp/'
 
     YELLOW = "\033[33m"
@@ -68,7 +69,7 @@ def main():
             search_zips(default_start_directory, files_from_txt, default_output_directory)
             print('Поиск завершен')
         elif command == '2':
-            while len(default_find_files) == 0:
+            if len(default_find_files) == 0:
                 default_find_files = pars_console(input('Введите список файлов: '))
                 search_zips(default_start_directory, default_find_files, default_output_directory)
             else:                                

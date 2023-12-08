@@ -20,20 +20,22 @@ def extract_necessary_files(zip_file_path, target_files, output_path):
             if item.filename in target_files:
                 extracted_file_name = item.filename
                 output_file_path = os.path.join(output_path, extracted_file_name)
+                print(f"Найден файл: {output_file_path}")
 
                 while os.path.exists(output_file_path):
+                    temp = output_file_path
                     extracted_file_name = get_unique_filename(output_path, extracted_file_name)
-                    print(f"Распакован файл: {extracted_file_name}")
+                    print(f"{temp} переименован в: {extracted_file_name}")
                     output_file_path = os.path.join(output_path, extracted_file_name)
 
                 with zip_file.open(item) as source, open(output_file_path, 'wb') as destination:
                     destination.write(source.read())
 
-def search_zips(directory, target_files, output_path):                                     # Рекурсивный поиск архивов Zip и последующий вызов функции
+def search_zips(directory, files, output):                                     # Рекурсивный поиск архивов Zip и последующий вызов функции
     for root, dirs, zips in os.walk(directory):
         for file in zips:
             if file.endswith(".zip"):
                 file_path = os.path.join(root, file)
                 
                 # print("Просмотрен ZIP:", file_path)
-                extract_necessary_files(file_path, target_files, output_path)
+                extract_necessary_files(file_path, files, output)
