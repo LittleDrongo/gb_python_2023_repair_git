@@ -102,11 +102,3 @@ def main():
 
 main()
 
-
-
-
-
-
-# with open('files.txt', 'w') as data:
-#     data.write('line 1\n')
-#     data.write('line 2\n')
