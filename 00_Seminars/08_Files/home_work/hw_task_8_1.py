@@ -2,6 +2,9 @@
 from os.path import exists
 from csv import DictReader, DictWriter
 
+file_name = 'phone.csv'
+export_file_name = 'copy_phone.csv'
+
 class MenuTextColor:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -36,8 +39,17 @@ def get_info():
             print(err)
             continue
 
-
-    last_name = 'Фомин'
+    is_valid_second_name = False
+    while not is_valid_second_name:
+        try:
+            last_name = input('Введите фамилию: ')
+            if len(last_name) < 2:
+                raise NameError('Не валидная фамилия')
+            else:
+                is_valid_second_name = True
+        except NameError as err:
+            print(err)
+            continue
     
     is_valid_phone = False
     while not is_valid_phone:
@@ -86,6 +98,28 @@ def write_file(file_name, lst):
         f_writer.writeheader()
         f_writer.writerows(res)
 
+def read_line(file_name, line):
+    with open(file_name, 'r', encoding='utf-8') as data:
+        f_reader = DictReader(data)
+        return list(f_reader)[line - 1]
+
+def count_lines(file_name):
+    elems = 0
+    with open(file_name, 'r', encoding='utf-8') as data:
+        f_reader = DictReader(data)
+        for i in f_reader:
+            elems += 1            
+        return elems
+
+def print_lines(file_name):
+
+    with open(file_name, 'r', encoding='utf-8') as data:
+        f_reader = DictReader(data)
+        num = 1
+        for i in f_reader:
+            print(num, i)
+            num += 1
+
 
 def show_menu():
     print()
@@ -93,11 +127,12 @@ def show_menu():
     print('1. Показать еще раз меню')
     print('2. Показать записи справочника')
     print('3. Внести запись в справочник')
-    print('2. ')
+    print('-----------------------------')
+    print('4. Показать пронумерованный список записей в справочнике')
+    print('5. Скопировать запись из справочника')
     print('0. Завершить работу')
+    print()
 
-file_name = 'phone.csv'
-export_file_name = 'copy_phone.csv'
 
 
 def main():
@@ -118,8 +153,21 @@ def main():
             if not exists(file_name):
                 create_file(file_name)
             write_file(file_name, get_info())
+        elif command == '4':
+            print_lines(file_name)
+        elif command == '5':
+            is_valid_line = False
+            while not is_valid_line:
+                max_line = count_lines(file_name)         
+                line = int(input('Введите номер строки для копирования: '))
+                if line <= max_line:
+                    print(f'{MenuTextColor.OKCYAN}Запись скопирована успешно!{MenuTextColor.RESET}')
+                    print(read_line(file_name, line))
+                    is_valid_line = True
+                else:
+                    print(f"{MenuTextColor.FAIL}Внимание, такой строки в справочнике нет, всего в словаре {max_line} записей.{MenuTextColor.RESET}")
+
         else:
             print(f'{MenuTextColor.FAIL}Внимание, не правильная команда!{MenuTextColor.RESET}')
-
 
 main()
