@@ -2,6 +2,19 @@
 from os.path import exists
 from csv import DictReader, DictWriter
 
+class MenuTextColor:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    RESET = "\033[0m"   
+
+
 class LenNumberError(Exception):
     def __init__(self, txt):
         self.txt = txt
@@ -72,19 +85,6 @@ def write_file(file_name, lst):
         f_writer = DictWriter(data, fieldnames=['Имя', 'Фамилия', 'Телефон'])
         f_writer.writeheader()
         f_writer.writerows(res)
-
-
-class MenuTextColor:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    RESET = "\033[0m"   
 
 
 def show_menu():
