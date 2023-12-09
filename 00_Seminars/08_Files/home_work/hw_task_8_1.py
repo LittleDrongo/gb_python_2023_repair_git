@@ -68,6 +68,7 @@ def get_info():
             print(err)
             continue
            
+    print(f'{MenuTextColor.OKCYAN}Записано: {first_name}, {last_name}, {phone_number} {MenuTextColor.RESET}')
     return [first_name, last_name, phone_number]
 
 
@@ -137,14 +138,13 @@ def copy_line_to_file(file_name, line, export_file_name):
 def show_menu():
     print()
     print(f'{MenuTextColor.YELLOW}МЕНЮ ВЫБОРА {MenuTextColor.RESET}')
-    print('1. Показать еще раз меню')
+    print('1. Показать меню выбора')
+    print('-----------------------------')
     print('2. Показать записи справочника')
     print('3. Внести запись в справочник')
     print('-----------------------------')
-    print('4. Показать пронумерованный список записей в справочнике')
+    print('4. Показать скопированные записи')
     print('5. Скопировать запись из справочника')
-    print('-----------------------------')
-    print('6. Показать скопированные записи')
     print('-----------------------------')
     print('0. Завершить работу')
     print()
@@ -164,13 +164,23 @@ def main():
              if not exists(file_name):
                  print(f'Файл {file_name} отсутствует, создайте его')
                  continue
-             print(read_file(file_name))
+             print_lines(file_name)             
+            #  print(read_file(file_name))
         elif command == '3':
             if not exists(file_name):
                 create_file(file_name)
             write_file(file_name, get_info())
+        
         elif command == '4':
-            print_lines(file_name)
+            if not exists(export_file_name):
+                print(f"{MenuTextColor.FAIL}Внимание, отсутствует файл '{export_file_name}'.{MenuTextColor.RESET}")
+                print(f"{MenuTextColor.YELLOW}Создать файл? 1 - да, 2 - нет.{MenuTextColor.RESET}")
+            else:
+                max_line = count_lines(export_file_name)
+                if max_line == 0:
+                    print(f"{MenuTextColor.YELLOW}Внимание, в словаре {max_line} записей, чтобы копировать запись, введите 5{MenuTextColor.RESET}")
+                print_lines(export_file_name)
+
         elif command == '5':
             if not exists(export_file_name):
                 print(f"{MenuTextColor.FAIL}Внимание, отсутствует файл '{export_file_name}'.{MenuTextColor.RESET}")
@@ -186,27 +196,9 @@ def main():
                     copy_line_to_file(file_name, line, export_file_name)
                     is_valid_line = True
                 else:
-                    print(f"{MenuTextColor.FAIL}Внимание, такой строки в справочнике нет, всего в словаре {max_line} записей.{MenuTextColor.RESET}")
+                    print(f"{MenuTextColor.FAIL}Внимание, такой строки в справочнике нет, всего в словаре {max_line} запись/ей.{MenuTextColor.RESET}")
 
 
-        elif command == '6':
-            if not exists(export_file_name):
-                print(f"{MenuTextColor.FAIL}Внимание, отсутствует файл '{export_file_name}'.{MenuTextColor.RESET}")
-                # print(f"{MenuTextColor.YELLOW}Создать файл? 1 - да, 2 - нет.{MenuTextColor.RESET}")
-                # is_valid_answer = False
-                # while not is_valid_answer:
-                #     answer = input('Введите команду: ')
-                #     if answer == '1':
-                #         create_file(export_file_name)
-                #         print(f"{MenuTextColor.OKCYAN}Файл '{export_file_name}' создан.{MenuTextColor.RESET}")
-                #         is_valid_answer = True
-                #     elif answer == '2':
-                #         print(f"{MenuTextColor.OKCYAN}Отмена, выходим в главное меню.{MenuTextColor.RESET}")
-                #         is_valid_answer = True
-                #     else:
-                #         print(f"{MenuTextColor.FAIL}Не корректный ответ!{MenuTextColor.RESET}")
-            else:
-                print_lines(export_file_name)
 
         else:
             print(f'{MenuTextColor.FAIL}Внимание, не правильная команда!{MenuTextColor.RESET}')
