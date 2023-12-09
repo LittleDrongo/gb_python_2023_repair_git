@@ -10,7 +10,9 @@ def main():
     files_from_txt = []
     
     # НАСТРОЙКИ ДЛЯ ТЕСТОВ
-    default_txt = 'C:/Test/file_list.txt'
+    default_txt = 'file_list.txt'
+    # default_txt = 'C:/Test/file_list.txt'
+       
     default_start_directory = 'C:/Test/start_dr'
     default_output_directory = 'C:/Test/outpute_dir'
 
