@@ -8,8 +8,9 @@
 from pandas import read_csv
 
 data = read_csv('california_housing_test.csv')
-# print(type(data))
-# print(data.shape)
-# print(data.dtypes)
-# print(data.info())
-print(data.describe())
+# print(type(data))         # тип данных всего объекта
+# print(data.shape)         # размер матрицы (строки, столбцы)
+# print(data.dtypes)        # тип данных
+# print(data.info())        # информация
+# print(data.describe())    # прочее
+
