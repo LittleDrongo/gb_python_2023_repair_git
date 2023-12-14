@@ -2,10 +2,6 @@ import imaplib
 import email
 from email.header import decode_header
 
-# python_pars@mail.ru
-# abrakadabra5221696
-# 86mvydGEVbRCQAJNsunv
-
 def decode_subject(encoded_subject):
     """Decode email subject."""
     headers = decode_header(encoded_subject)
@@ -30,24 +26,32 @@ def fetch_email_content(email_id, mail):
         msg = email.message_from_bytes(raw_email)
         subject = decode_subject(msg["Subject"])
         sender = decode_sender(msg.get("From"))
-        decodet_body = decode_subject(msg.get("Body"))
 
         print(f"Subject: {subject}")
         print(f"From: {sender}")
-        print("Body:")        
+        print("Body:")
+        
         if msg.is_multipart():
             for part in msg.walk():
                 if part.get_content_type() == "text/plain":
-                    print(part.get_payload(decode=True).decode('utf-8'))
+                    payload = part.get_payload(decode=True)
+                    try:
+                        print(payload.decode('utf-8'))
+                    except UnicodeDecodeError:
+                        print(payload.decode('utf-8', errors='replace'))
         else:
-            print(msg.get_payload(decode=True).decode('utf-8'))
+            payload = msg.get_payload(decode=True)
+            try:
+                print(payload.decode('utf-8'))
+            except UnicodeDecodeError:
+                print(payload.decode('utf-8', errors='replace'))
+        
         print("=" * 30)
-    
+   
 
 def check_emails():
     # Параметры для подключения к почтовому ящику
     EMAIL = 'python_pars@mail.ru'
-    # PASSWORD = 'abrakadabra5221696'
     PASSWORD = '86mvydGEVbRCQAJNsunv'
     IMAP_SERVER = 'imap.mail.ru'
     
