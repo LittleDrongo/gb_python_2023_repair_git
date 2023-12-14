@@ -3,6 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from auth_data import *
+import re
 
 def send_email(to_address, body, subject, attachments, params=smtp_params):
     
@@ -25,7 +26,9 @@ def send_email(to_address, body, subject, attachments, params=smtp_params):
     for attachment in attachments:
         with open(attachment, 'rb') as file:
             part = MIMEApplication(file.read(), Name=attachment)
+            # part['Content-Disposition'] = f'attachment; filename="{attachment}"'
             part['Content-Disposition'] = f'attachment; filename="{attachment}"'
+
             msg.attach(part)
 
     # Установка соединения с SMTP-сервером и отправка письма
