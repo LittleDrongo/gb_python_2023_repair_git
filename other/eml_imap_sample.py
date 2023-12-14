@@ -1,11 +1,13 @@
 import imaplib
-import email
+from email import *
 from email.header import decode_header
 
 def decode_subject(encoded_subject):
     """Decode email subject."""
     headers = decode_header(encoded_subject)
     return " ".join([text if isinstance(text, str) else text.decode(encoding or 'utf-8', errors='ignore') for text, encoding in headers])
+
+
 def decode_sender(sender):
     """Decode email sender."""
     try:
@@ -17,14 +19,16 @@ def decode_sender(sender):
     except Exception as e:
         print(f"Error decoding sender: {e}")
         return sender
+    
 
 def fetch_email_content(email_id, mail):
     """Fetch and print email content."""
     result, data = mail.fetch(email_id, '(RFC822)')
     if result == 'OK':
         raw_email = data[0][1]
-        msg = email.message_from_bytes(raw_email)
+        msg = message_from_bytes(raw_email)
         subject = decode_subject(msg["Subject"])
+        
         sender = decode_sender(msg.get("From"))
 
         print(f"Subject: {subject}")
@@ -52,7 +56,7 @@ def fetch_email_content(email_id, mail):
 def check_emails():
     # Параметры для подключения к почтовому ящику
     EMAIL = 'python_pars@mail.ru'
-    PASSWORD = '86mvydGEVbRCQAJNsunv'
+    PASSWORD = 'uabq0TgU8kPxnBht4NfM'
     IMAP_SERVER = 'imap.mail.ru'
     
     # Подключение к серверу по протоколу IMAP

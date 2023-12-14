@@ -52,7 +52,7 @@ def fetch_email_content(email_id, mail):
 def check_emails():
     # Параметры для подключения к почтовому ящику
     EMAIL = 'python_pars@mail.ru'
-    PASSWORD = '86mvydGEVbRCQAJNsunv'
+    PASSWORD = 'uabq0TgU8kPxnBht4NfM'
     IMAP_SERVER = 'imap.mail.ru'
     
     # Подключение к серверу по протоколу IMAP
