@@ -2,9 +2,9 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
+from auth_data import *
 
-
-def send_email(to_address, body, subject, attachments, params):
+def send_email(to_address, body, subject, attachments, params=smtp_params):
     
     smtp_server = params['smtp_server']
     smtp_port = params['smtp_port']
@@ -36,6 +36,8 @@ def send_email(to_address, body, subject, attachments, params):
 
 # Пример использования
 
+"""
+
 smtp_params = {'smtp_server': 'smtp.mail.ru',
               'smtp_port': 587,
               'smtp_username': 'python_pars',
@@ -49,3 +51,6 @@ subject = 'Тестовое письмо с вложениями'
 attachments = ['eml_test.csv', 'eml_test copy.csv']
 
 send_email(to_address, body, subject, attachments, smtp_params)
+
+
+"""

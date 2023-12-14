@@ -2,14 +2,24 @@ import imaplib
 import email
 from email.header import decode_header
 import re
+from auth_data import *
 
-def get_unread_emails(email_address, folder='INBOX', imap_server='imap.mail.ru', imap_port=993, imap_password='None'):
+# print(imap_params)
+
+def get_unread_emails(params):
+
+    imap_server = params['imap_server']
+    imap_password = params['imap_password']
+    imap_port = params['imap_port']
+    imap_folder = params['imap_folder']
+    email_address = params['email_address']
+
     # Подключение к серверу IMAP
     mail = imaplib.IMAP4_SSL(imap_server, imap_port)
     mail.login(email_address, imap_password)
 
     # Выбор папки
-    mail.select(folder)
+    mail.select(imap_folder)
 
     # Поиск непрочитанных писем
     status, messages = mail.search(None, '(UNSEEN)')
@@ -37,7 +47,7 @@ def get_unread_emails(email_address, folder='INBOX', imap_server='imap.mail.ru',
 
         from_full = msg.get('From')
         
-        # Используем регулярное выражение для поиска email-адреса
+        # Используем регулярное выражение для поиска email-адреса в переменной from_full
         match = re.search(r'<([^>]+)>', from_full)
         from_email = None
 
@@ -46,12 +56,20 @@ def get_unread_emails(email_address, folder='INBOX', imap_server='imap.mail.ru',
         else:
             from_email = None
 
+        # Декодирование тела письма
+        body = None
+        for part in msg.walk():
+            if part.get_content_type() == "text/plain":
+                body = part.get_payload(decode=True).decode(part.get_content_charset() or 'utf-8', errors='replace')
+                break
+
         # Добавление информации о письме в список
         unread_emails.append({
             'Subject': subject,
             'From': from_full,
             'Name': from_name,
-            'Email' : from_email
+            'Email' : from_email,
+            'Body': body
         })
 
     # Закрытие соединения
@@ -60,10 +78,20 @@ def get_unread_emails(email_address, folder='INBOX', imap_server='imap.mail.ru',
     return unread_emails
 
 # Пример использования:
-email_address = 'python_pars@mail.ru'
-imap_password = 'tLSHqB1uBe2F3u5Q5xGc'
-unread_emails = get_unread_emails(email_address, imap_password=imap_password)
+
+"""
+unread_emails = get_unread_emails(imap_params)
+
 
 # Вывод списка непрочитанных писем
+
 for email_info in unread_emails:
     print(f"Входящее: {email_info['Name']} <{email_info['Email']}> | {email_info['Subject']}")
+    print(f"{email_info['Body']}")
+    print("—"*100)
+    email_body_strs = email_info['Body']
+    file_list = email_body_strs.split()
+    
+    for file in file_list:
+        print(file)
+"""

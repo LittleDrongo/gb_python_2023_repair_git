@@ -48,7 +48,7 @@ def check_emails():
     # Параметры для подключения к почтовому ящику
     EMAIL = 'python_pars@mail.ru'
     # PASSWORD = 'abrakadabra5221696'
-    PASSWORD = '86mvydGEVbRCQAJNsunv'
+    PASSWORD = 'Wq0YX8SzYY0yqK5yqbFi'
     IMAP_SERVER = 'imap.mail.ru'
     
     # Подключение к серверу по протоколу IMAP
