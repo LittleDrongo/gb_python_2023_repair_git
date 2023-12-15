@@ -13,3 +13,7 @@ imap_params = {'imap_server': 'imap.mail.ru',
               'imap_folder' : 'INBOX',
               'email_address' : 'python_pars@mail.ru'           
               }
+
+default_start_directory = 'C:/Test/start_dr'
+default_output_directory = 'C:/Test/outpute_dir'
+auth_subj = 'CLR_001'

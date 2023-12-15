@@ -4,7 +4,6 @@ from email.header import decode_header
 import re
 from auth_data import *
 
-# print(imap_params)
 
 def get_unread_emails(params):
 
