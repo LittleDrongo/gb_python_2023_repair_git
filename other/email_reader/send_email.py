@@ -5,6 +5,8 @@ from email.mime.application import MIMEApplication
 from auth_data import *
 import os
 
+from exctractor import *
+
 def send_email(to_address, body, subject, attachments, params=smtp_params):
     
     smtp_server = params['smtp_server']
