@@ -26,51 +26,99 @@ random.shuffle(lst)
 data = pd.DataFrame({'whoAmI':lst})
 data.head()
 
-# print(data)
+print(data)
 
 def decode_to_one_hote(data):
     """Функция на вход принимат DataFrame и возвращает данные в кодировке 'One not' с таблицей бинароного вида (int)"""
     bin_data = pd.get_dummies(data, dtype=int)
     return bin_data
 
-oh_data2 = decode_to_one_hote(data)
-print(oh_data2)
-
-# res = data[(data[1])]
-# res = data.iloc[:0, :]          #получение 2-х стлбцов через срезы, 1: - все строки; 2: - только первые 2 слобца
+# oh_data2 = decode_to_one_hote(data)
+# print(oh_data2)
 
 # Получаю список уникальных значений
 data_unique = data['whoAmI'].unique() 
 print(sorted(data_unique))
 
+
 # Создают наименование столбцов для последующего создания таблицы
 data_unique_header = []
 for i in data_unique:
-    data_unique_header.append([f'whoAmI_{i}'])
+    data_unique_header.append(f'whoAmI_{i}')
 
-# Создаю новую таблицу типа OneHot пока с пустыми значениями
-df = pd.DataFrame()
-for i in data_unique:
-    df.insert (loc= len(df.columns) , column=i, value=None)
 
 # Получаем кол-во строк таблицы
 lengh_table = len(data.axes[0]) 
 
-df.at [1, 'robot'] = 54
+
+# Создаю новую таблицу типа OneHot пока с пустыми значениями
+
+df = pd.DataFrame()
+
+for i in data_unique:
+    df.insert (loc= len(df.columns) , column=i, value=None)
+
+for j in data_unique:    
+    for i in range(lengh_table):    
+        df.at [i, j] = 0
+
+print('это пустая таблица с 0')
+print(df)
+
+# #Заполняем столбец значением 1 если оно равно заголовку в Data
+df.loc[data['whoAmI'] == 'robot', 'robot'] = 1
+
+
+#Заполняем столбец значением 1 если оно равно заголовку в Data
+for i in data_unique:
+    df.loc[data['whoAmI'] == i, i] = 1
+
+
+#
+
+print()
+print(df)
+
+# data_list = list(data)
+
+# print(data)
+# for j in data_unique:    
+#     for i in range(lengh_table):    
+#         df.at [i, j] = 0
+
+# # print(data)
+# for i in data_unique:
+#     for j in range(lengh_table):    
+#         df.at [j, data_unique[i]] = 54
+
+print(df)
+    
+# data.loc[data['whoAmI'] == 'robot', 'whoAmI'] = 0 # ВОТ ЭТО ПОНАДОБИТЬСЯ ЧТОБЫ ПЕРЕИМЕНОВАТЬ В 1 и 0
+
+    # res = data.iloc[:, :]
+    # print(temp)
+    # df.at [i, 'robot'] = 54
+
+# temp.loc[((df['col1'] == 'A') &(df['col2' ] == 'G'))]
+# print(df)
+
+"""for i in lengh_table:
+    yachika = df[data_unique[0]]. values [i]
+    print(yachika)
+"""
+# print(df)
+
+
+
+
+# df2 = pd.DataFrame()
+
+# df2.at [1, 'robot'] = 54
+# print(df)
 
 # for uniq in data_unique:
 #     for pos in lengh_table:
 #         df.at [pos, uniq] = '99'
-
-# print(lengh_table)
-# df = pd.DataFrame(np.insert(df.values , 0, values=['A', 3, 4], axis= 0 ))
-
-print(data_unique_header)
-print(df)
-
-
-# df = pd.DataFrame({'whoAmI_{i}':[1,1,3,2,6,2,8]}) # пример как заполнять таблицы и значения
-
 
 
 
