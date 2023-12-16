@@ -28,110 +28,74 @@ data.head()
 
 print(data)
 
-def decode_to_one_hote(data):
-    """Функция на вход принимат DataFrame и возвращает данные в кодировке 'One not' с таблицей бинароного вида (int)"""
+
+def decode_via_dummies(data):
+    """
+    Метод на вход принимат DataFrame и возвращает данные в кодировке 'One not' с таблицей бинароного вида (int) \n
+    В качестве основного метода используется get_dummies
+    """
     bin_data = pd.get_dummies(data, dtype=int)
     return bin_data
 
-# oh_data2 = decode_to_one_hote(data)
-# print(oh_data2)
 
-# Получаю список уникальных значений
-data_unique = data['whoAmI'].unique() 
-print(sorted(data_unique))
+def decode_to_one_hote(data):
+    """
+    Метод на вход принимат DataFrame и возвращает данные в кодировке 'One not' с таблицей бинароного вида (int) \n
+    """
+
+    # Получаю список уникальных значений
+    data_unique = data['whoAmI'].unique() 
+
+    # Создают наименование столбцов для последующего создания таблицы
+    data_unique_header = []
+    for i in data_unique:
+        data_unique_header.append(f'whoAmI_{i}')
+
+    # Получаем кол-во строк таблицы
+    lengh_table = len(data.axes[0])
+
+    # Получаем кол-во строк стобцов
+    columns_count = len(data_unique)
+
+    # Создаю новую таблицу типа OneHot пока с пустыми значениями
+
+    df = pd.DataFrame()
+
+    for i in data_unique:
+        df.insert (loc= len(df.columns) , column=i, value=None)
+
+    for j in data_unique:    
+        for i in range(lengh_table):    
+            df.at [i, j] = 0
+
+    # Заполняем столбец значением 1 если оно равно заголовку в Data
+    for i in data_unique:
+        df.loc[data['whoAmI'] == i, i] = int(1)
+
+    # Переименовываем столбцы в корректное название
+    for i in range(columns_count):
+        df.rename(columns = {data_unique[i] : data_unique_header[i]}, inplace = True)
+
+    return df
 
 
-# Создают наименование столбцов для последующего создания таблицы
-data_unique_header = []
-for i in data_unique:
-    data_unique_header.append(f'whoAmI_{i}')
+# Вызов методов
+
+res_data_1 = decode_via_dummies(data)
+print(type(res_data_1))
+print(res_data_1)
 
 
-# Получаем кол-во строк таблицы
-lengh_table = len(data.axes[0]) 
+res_data_2 = decode_to_one_hote(data)
+print(type(res_data_2))
+print(res_data_2)
 
 
-# Создаю новую таблицу типа OneHot пока с пустыми значениями
-
-df = pd.DataFrame()
-
-for i in data_unique:
-    df.insert (loc= len(df.columns) , column=i, value=None)
-
-for j in data_unique:    
-    for i in range(lengh_table):    
-        df.at [i, j] = 0
-
-print('это пустая таблица с 0')
-print(df)
-
-# #Заполняем столбец значением 1 если оно равно заголовку в Data
-df.loc[data['whoAmI'] == 'robot', 'robot'] = 1
+print(
+    res_data_1.equals(res_data_2)
+    )
 
 
-#Заполняем столбец значением 1 если оно равно заголовку в Data
-for i in data_unique:
-    df.loc[data['whoAmI'] == i, i] = 1
-
-
-#
-
-print()
-print(df)
-
-# data_list = list(data)
-
-# print(data)
-# for j in data_unique:    
-#     for i in range(lengh_table):    
-#         df.at [i, j] = 0
-
-# # print(data)
-# for i in data_unique:
-#     for j in range(lengh_table):    
-#         df.at [j, data_unique[i]] = 54
-
-print(df)
-    
-# data.loc[data['whoAmI'] == 'robot', 'whoAmI'] = 0 # ВОТ ЭТО ПОНАДОБИТЬСЯ ЧТОБЫ ПЕРЕИМЕНОВАТЬ В 1 и 0
-
-    # res = data.iloc[:, :]
-    # print(temp)
-    # df.at [i, 'robot'] = 54
-
-# temp.loc[((df['col1'] == 'A') &(df['col2' ] == 'G'))]
-# print(df)
-
-"""for i in lengh_table:
-    yachika = df[data_unique[0]]. values [i]
-    print(yachika)
 """
-# print(df)
-
-
-
-
-# df2 = pd.DataFrame()
-
-# df2.at [1, 'robot'] = 54
-# print(df)
-
-# for uniq in data_unique:
-#     for pos in lengh_table:
-#         df.at [pos, uniq] = '99'
-
-
-
-# oh_data = pd.DataFrame({'whoAmI':lst})
-# oh_data.head()
-# print(res)
-
-# print(type(data))         # тип данных всего объекта
-# print(data.shape)         # размер матрицы (строки, столбцы)
-# print(data.dtypes)        # тип данных
-# print(data.info())        # информация
-# print(data.describe())    # прочее
-
-
-
-# print(data)
+Резюме, по какой то причине если сравнить таблицы данных на сходство через 'equals' мой вариант функции и встроенный вариант get_dummy имеет некую разницу, однако я не смог понять что не так.
+"""
