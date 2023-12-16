@@ -22,6 +22,7 @@ import pandas as pd
 
 lst = ['robot'] * 10
 lst += ['human'] * 10
+# lst += ['alien'] * 10
 random.shuffle(lst)
 data = pd.DataFrame({'whoAmI':lst})
 data.head()
@@ -44,12 +45,12 @@ def decode_to_one_hote(data):
     """
 
     # Получаю список уникальных значений
-    data_unique = data['whoAmI'].unique() 
+    data_unique = sorted(data['whoAmI'].unique() )
 
     # Создают наименование столбцов для последующего создания таблицы
     data_unique_header = []
     for i in data_unique:
-        data_unique_header.append(f'whoAmI_{i}')
+        data_unique_header.append(f' whoAmI_{i}')
 
     # Получаем кол-во строк таблицы
     lengh_table = len(data.axes[0])
@@ -95,7 +96,12 @@ print(
     res_data_1.equals(res_data_2)
     )
 
+# lis = ['a','b','g','d']
+# print(lis)
 
+
+# lis = sorted(lis)
+# print(lis)
 """
 Резюме, по какой то причине если сравнить таблицы данных на сходство через 'equals' мой вариант функции и встроенный вариант get_dummy имеет некую разницу, однако я не смог понять что не так.
 """
