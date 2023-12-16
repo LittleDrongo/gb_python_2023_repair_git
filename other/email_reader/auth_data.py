@@ -1,6 +1,3 @@
-# PASSWORD = 'abrakadabra5221696'
-# Wq0YX8SzYY0yqK5yqbFi
-
 default_start_directory = 'C:/Test/start_dr'
 default_output_directory = 'C:/Test/outpute_dir'
 auth_subj = 'CLR_001'
@@ -18,8 +15,3 @@ imap_params = {'imap_server': 'imap.mail.ru',
             'imap_folder' : 'INBOX',
             'email_address' : 'python_pars@mail.ru'           
             }
-
-
-# password_menu = 'dsadas'
-# smtp_params['smtp_password'] = password_menu
-# imap_params['imap_password'] = password_menu
